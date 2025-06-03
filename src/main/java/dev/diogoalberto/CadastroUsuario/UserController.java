@@ -3,10 +3,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
+public class UserController {
 
-    @GetMapping("/boasvindas")
-    public String boasVindas(){
-        return "Olá Mundo SpringBoot";
+    @GetMapping("/wellcome")
+    public String greeting(){
+        return "Hi!";
     }
 }
