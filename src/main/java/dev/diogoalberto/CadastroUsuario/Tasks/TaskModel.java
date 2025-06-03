@@ -1,6 +1,9 @@
 package dev.diogoalberto.CadastroUsuario.Tasks;
 
+import dev.diogoalberto.CadastroUsuario.Users.UserModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_tasks")
@@ -10,6 +13,7 @@ public class TaskModel {
     private Long id;
     private String name;
     private String difficulty;
+    private List<UserModel> users;
 
     public TaskModel() {
     }
