@@ -1,4 +1,4 @@
-package dev.diogoalberto.CadastroUsuario;
+package dev.diogoalberto.CadastroUsuario.Users;
 
 import jakarta.persistence.*;
 
