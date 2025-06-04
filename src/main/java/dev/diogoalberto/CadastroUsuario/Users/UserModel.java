@@ -16,6 +16,7 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true)
     private String email;
     private int age;
     @ManyToOne//muitos usuarios terão uma missão
