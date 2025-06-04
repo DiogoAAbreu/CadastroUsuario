@@ -19,7 +19,7 @@ public class UserModel {
     @Column(unique = true)
     private String email;
     private int age;
-    @ManyToOne//muitos usuarios terão uma missão
-    @JoinColumn(name = "tasks_id")//usado apra criar uma nova coluna com a chave estrangeira que vem de tasks
+    @ManyToOne//muitos usuarios terão uma missãot
+    @JoinColumn(name = "tasks_id")//usado apra criar uma nova coluna com a chave esrangeira que vem de tasks
     private TaskModel task;
 }
