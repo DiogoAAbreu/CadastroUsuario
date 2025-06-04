@@ -13,6 +13,8 @@ public class TaskModel {
     private Long id;
     private String name;
     private String difficulty;
+    //uma missão terá varios usuários - mostra que task será a chave correspondente a essa entidade
+    @OneToMany(mappedBy = "task")
     private List<UserModel> users;
 
     public TaskModel() {

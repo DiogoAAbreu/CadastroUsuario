@@ -1,5 +1,6 @@
 package dev.diogoalberto.CadastroUsuario;
 
+import dev.diogoalberto.CadastroUsuario.Tasks.TaskModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,10 +8,14 @@ import jakarta.persistence.*;
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    String email;
-    int age;
+    private Long id;
+    private String name;
+    private String email;
+    private int age;
+    //muitos usuarios terão uma missão
+    @ManyToOne
+    @JoinColumn(name = "tasks_id")//usado apra criar uma nova coluna com a chave estrangeira que vem de tasks
+    private TaskModel task;
 
     public UserModel() {
     }
