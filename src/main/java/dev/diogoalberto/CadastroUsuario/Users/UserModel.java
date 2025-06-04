@@ -3,10 +3,12 @@ package dev.diogoalberto.CadastroUsuario.Users;
 import dev.diogoalberto.CadastroUsuario.Tasks.TaskModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_cadastro")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserModel {
