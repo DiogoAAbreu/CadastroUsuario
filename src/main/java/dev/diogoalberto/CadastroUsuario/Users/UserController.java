@@ -3,6 +3,7 @@ import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping
 public class UserController {
 
     @GetMapping("/wellcome")
@@ -30,7 +31,7 @@ public class UserController {
 
     //alterar dados do usuario (UPDATE)
     @PutMapping("/user/:id")
-    public String putUserById(){
+    public String alterUserById(){
         return "User updated";
     }
 
