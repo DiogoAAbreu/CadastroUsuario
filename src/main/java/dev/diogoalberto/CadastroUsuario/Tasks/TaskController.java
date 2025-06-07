@@ -4,10 +4,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping
 public class TaskController {
     private TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @PostMapping("/task")
     public String createTask(){return "Task created.";}
@@ -21,6 +26,6 @@ public class TaskController {
     @PutMapping("/task/:id")
     public String alterTaskById(){return "Task updated.";}
 
-    @DeleteMapping("/task")
+    @DeleteMapping("/task/:id")
     public String deleteTaskById(){return "Task deleted.";}
 }
