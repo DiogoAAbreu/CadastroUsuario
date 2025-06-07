@@ -1,4 +1,6 @@
 package dev.diogoalberto.CadastroUsuario.Users;
 
-public class UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<UserModel, Long> {
 }

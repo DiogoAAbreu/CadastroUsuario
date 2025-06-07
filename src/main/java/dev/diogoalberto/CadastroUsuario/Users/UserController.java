@@ -1,5 +1,5 @@
 package dev.diogoalberto.CadastroUsuario.Users;
-import org.springframework.scheduling.support.SimpleTriggerContext;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
