@@ -2,9 +2,16 @@ package dev.diogoalberto.CadastroUsuario.Users;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class UserController {
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/wellcome")
     public String greeting(){
@@ -25,8 +32,8 @@ public class UserController {
 
     //mostrar todos usuarios (READ)
     @GetMapping("/user")
-    public String getUsers(){
-        return "Users found.";
+    public List<UserModel> getUsers(){
+        return userService.getUsers();
     }
 
     //alterar dados do usuario (UPDATE)

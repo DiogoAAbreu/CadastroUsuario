@@ -1,5 +1,6 @@
 package dev.diogoalberto.CadastroUsuario.Tasks;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.diogoalberto.CadastroUsuario.Users.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,5 +22,6 @@ public class TaskModel {
     private String difficulty;
     //uma missão terá varios usuários - mostra que task será a chave correspondente a essa entidade
     @OneToMany(mappedBy = "task")
+    @JsonIgnore
     private List<UserModel> users;
 }
