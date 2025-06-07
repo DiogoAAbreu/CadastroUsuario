@@ -2,14 +2,18 @@ package dev.diogoalberto.CadastroUsuario.Tasks;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class TaskController {
+    private TaskService taskService;
+
     @PostMapping("/task")
     public String createTask(){return "Task created.";}
 
     @GetMapping("/task")
-    public String getTasks(){return "Tasks found.";}
+    public List<TaskModel> getTasks(){return taskService.getTasks();}
 
     @GetMapping("/task/:id")
     public String getTaskById(){return "Task found.";}
