@@ -25,9 +25,9 @@ public class UserController {
     }
 
     //mostrar usuario por ID (READ)
-    @GetMapping("/user/:id")
-    public String getUserById(){
-        return "User found.";
+    @GetMapping("/user/{id}")
+    public UserModel getUserById(@PathVariable Long id){
+        return userService.getUserById(id);
     }
 
     //mostrar todos usuarios (READ)
