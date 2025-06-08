@@ -20,8 +20,8 @@ public class TaskController {
     @GetMapping("/task")
     public List<TaskModel> getTasks(){return taskService.getTasks();}
 
-    @GetMapping("/task/:id")
-    public String getTaskById(){return "Task found.";}
+    @GetMapping("/task/{id}")
+    public TaskModel getTaskById(@PathVariable Long id){return taskService.getTaskById(id);}
 
     @PutMapping("/task/:id")
     public String alterTaskById(){return "Task updated.";}
