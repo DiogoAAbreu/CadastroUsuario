@@ -15,10 +15,16 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     @Column(unique = true)
     private String email;
+
     private int age;
+
+    private String seniority;
+
     @ManyToOne//muitos usuarios terão uma missãot
     @JoinColumn(name = "tasks_id")//usado apra criar uma nova coluna com a chave esrangeira que vem de tasks
     private TaskModel task;
