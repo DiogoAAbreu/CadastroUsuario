@@ -23,4 +23,8 @@ public class UserService {
         Optional<UserModel> user = userRepository.findById(id);
         return user.orElse(null);
     }
+
+    public UserModel createUser(UserModel user){
+        return userRepository.save(user);
+    }
 }
