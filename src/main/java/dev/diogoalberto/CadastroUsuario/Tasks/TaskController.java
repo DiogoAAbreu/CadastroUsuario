@@ -28,6 +28,8 @@ public class TaskController {
     @PutMapping("/task/:id")
     public String alterTaskById(){return "Task updated.";}
 
-    @DeleteMapping("/task/:id")
-    public String deleteTaskById(){return "Task deleted.";}
+    @DeleteMapping("/task/{id}")
+    public void deleteTaskById(@PathVariable Long id){
+        taskService.deleteTaskById(id);
+    }
 }
