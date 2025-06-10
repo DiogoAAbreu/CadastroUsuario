@@ -31,4 +31,12 @@ public class UserService {
     public void deleteUserById (Long id){
         userRepository.deleteById(id);
     }
+
+    public UserModel alterUserById(Long id, UserModel newUser){
+        if(userRepository.existsById(id)){
+            newUser.setId(id);
+            return userRepository.save(newUser);
+        }
+        return null;
+    }
 }
