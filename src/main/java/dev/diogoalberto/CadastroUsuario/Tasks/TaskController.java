@@ -25,8 +25,10 @@ public class TaskController {
     @GetMapping("/task/{id}")
     public TaskModel getTaskById(@PathVariable Long id){return taskService.getTaskById(id);}
 
-    @PutMapping("/task/:id")
-    public String alterTaskById(){return "Task updated.";}
+    @PutMapping("/task/{id}")
+    public TaskModel alterTaskById(@PathVariable Long id, @RequestBody TaskModel newTask){
+        return taskService.alterTaskById(id, newTask);
+    }
 
     @DeleteMapping("/task/{id}")
     public void deleteTaskById(@PathVariable Long id){

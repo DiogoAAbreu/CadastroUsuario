@@ -29,4 +29,12 @@ public class TaskService {
     public void deleteTaskById(Long id){
         taskRepository.deleteById(id);
     }
+
+    public TaskModel alterTaskById(Long id, TaskModel newTask){
+        if(taskRepository.existsById(id)){
+            newTask.setId(id);
+            return taskRepository.save(newTask);
+        }
+        return null;
+    }
 }
