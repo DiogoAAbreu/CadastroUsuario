@@ -26,7 +26,7 @@ public class UserController {
 
     //mostrar usuario por ID (READ)
     @GetMapping("/user/{id}")
-    public UserModel getUserById(@PathVariable Long id){
+    public UserModel getUserById(@PathVariable long id){
         return userService.getUserById(id);
     }
 
@@ -38,13 +38,13 @@ public class UserController {
 
     //alterar dados do usuario (UPDATE)
     @PutMapping("/user/{id}")
-    public UserModel alterUserById(@PathVariable Long id, @RequestBody UserModel newUser){
+    public UserModel alterUserById(@PathVariable long id, @RequestBody UserModel newUser){
         return userService.alterUserById(id, newUser);
     }
 
     //deletar usuario (DELETE)
     @DeleteMapping("/user/{id}")
-    public void deleteUserById(@PathVariable Long id){
+    public void deleteUserById(@PathVariable long id){
         userService.deleteUserById(id);
     }
 }
