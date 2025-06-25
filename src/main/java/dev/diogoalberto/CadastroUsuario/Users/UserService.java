@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -16,14 +17,18 @@ public class UserService {
     }
 
     //Listar todos usuarios
-    public List<UserModel> getUsers(){
+    public List<UserDTO> getUsers(){
         //não preciso passar nenhum paramentro para a busca pois na criação da interface de repository eu ja passei os parametros necessarios
-        return userRepository.findAll();
+        List<UserModel> users = userRepository.findAll();
+
+        return users.stream()
+                .map(userMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public UserModel getUserById(Long id){
+    public UserDTO getUserById(Long id){
         Optional<UserModel> user = userRepository.findById(id);
-        return user.orElse(null);
+        return user.map(userMapper::map).orElse(null);
     }
 
     public UserDTO createUser(UserDTO userDTO){
@@ -36,10 +41,13 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public UserModel alterUserById(Long id, UserModel newUser){
-        if(userRepository.existsById(id)){
-            newUser.setId(id);
-            return userRepository.save(newUser);
+    public UserDTO alterUserById(Long id, UserDTO newUser){
+        Optional<UserModel> user = userRepository.findById(id);
+        if(user.isPresent()){
+            UserModel userModel = userMapper.map(newUser);
+            userModel.setId(id);
+            UserModel savedUser = userRepository.save(userModel);
+            return userMapper.map(savedUser);
         }
         return null;
     }

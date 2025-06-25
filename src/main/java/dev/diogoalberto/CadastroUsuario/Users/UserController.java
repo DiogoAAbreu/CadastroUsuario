@@ -26,19 +26,19 @@ public class UserController {
 
     //mostrar usuario por ID (READ)
     @GetMapping("/user/{id}")
-    public UserModel getUserById(@PathVariable long id){
+    public UserDTO getUserById(@PathVariable long id){
         return userService.getUserById(id);
     }
 
     //mostrar todos usuarios (READ)
     @GetMapping("/user")
-    public List<UserModel> getUsers(){
+    public List<UserDTO> getUsers(){
         return userService.getUsers();
     }
 
     //alterar dados do usuario (UPDATE)
     @PutMapping("/user/{id}")
-    public UserModel alterUserById(@PathVariable long id, @RequestBody UserModel newUser){
+    public UserDTO alterUserById(@PathVariable long id, @RequestBody UserDTO newUser){
         return userService.alterUserById(id, newUser);
     }
 
