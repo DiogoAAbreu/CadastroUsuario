@@ -23,15 +23,15 @@ public class TaskController {
     public List<TaskModel> getTasks(){return taskService.getTasks();}
 
     @GetMapping("/task/{id}")
-    public TaskModel getTaskById(@PathVariable Long id){return taskService.getTaskById(id);}
+    public TaskModel getTaskById(@PathVariable long id){return taskService.getTaskById(id);}
 
     @PutMapping("/task/{id}")
-    public TaskModel alterTaskById(@PathVariable Long id, @RequestBody TaskModel newTask){
+    public TaskModel alterTaskById(@PathVariable long id, @RequestBody TaskModel newTask){
         return taskService.alterTaskById(id, newTask);
     }
 
     @DeleteMapping("/task/{id}")
-    public void deleteTaskById(@PathVariable Long id){
+    public void deleteTaskById(@PathVariable long id){
         taskService.deleteTaskById(id);
     }
 }
