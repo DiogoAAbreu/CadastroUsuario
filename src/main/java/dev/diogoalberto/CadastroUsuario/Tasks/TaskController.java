@@ -15,18 +15,18 @@ public class TaskController {
     }
 
     @PostMapping("/task")
-    public TaskModel createTask(@RequestBody TaskModel task){
+    public TaskDTO createTask(@RequestBody TaskDTO task){
         return taskService.createTask(task);
     }
 
     @GetMapping("/task")
-    public List<TaskModel> getTasks(){return taskService.getTasks();}
+    public List<TaskDTO> getTasks(){return taskService.getTasks();}
 
     @GetMapping("/task/{id}")
-    public TaskModel getTaskById(@PathVariable long id){return taskService.getTaskById(id);}
+    public TaskDTO getTaskById(@PathVariable long id){return taskService.getTaskById(id);}
 
     @PutMapping("/task/{id}")
-    public TaskModel alterTaskById(@PathVariable long id, @RequestBody TaskModel newTask){
+    public TaskDTO alterTaskById(@PathVariable long id, @RequestBody TaskDTO newTask){
         return taskService.alterTaskById(id, newTask);
     }
 

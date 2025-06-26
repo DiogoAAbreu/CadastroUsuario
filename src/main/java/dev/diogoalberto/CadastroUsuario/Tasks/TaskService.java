@@ -1,39 +1,52 @@
 package dev.diogoalberto.CadastroUsuario.Tasks;
 
+import dev.diogoalberto.CadastroUsuario.Users.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
     private TaskRepository taskRepository;
+    private TaskMapper taskMapper;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
+        this.taskMapper = taskMapper;
     }
 
-    public List<TaskModel> getTasks(){
-        return taskRepository.findAll();
+    public List<TaskDTO> getTasks(){
+        List<TaskModel> tasks = taskRepository.findAll();
+
+        return tasks.stream()
+                .map(taskMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public TaskModel getTaskById(Long id){
+    public TaskDTO getTaskById(Long id){
         Optional<TaskModel> task = taskRepository.findById(id);
-        return task.orElse(null);
+        return task.map(taskMapper::map).orElse(null);
     }
 
-    public TaskModel createTask(TaskModel task){
-        return taskRepository.save(task);
+    public TaskDTO createTask(TaskDTO taskDTO){
+        TaskModel taskModel = taskMapper.map(taskDTO);
+        taskModel = taskRepository.save(taskModel);
+        return taskMapper.map(taskModel);
     }
 
     public void deleteTaskById(Long id){
         taskRepository.deleteById(id);
     }
 
-    public TaskModel alterTaskById(Long id, TaskModel newTask){
-        if(taskRepository.existsById(id)){
-            newTask.setId(id);
-            return taskRepository.save(newTask);
+    public TaskDTO alterTaskById(Long id, TaskDTO newTask){
+        Optional<TaskModel> task = taskRepository.findById(id);
+        if(task.isPresent()){
+            TaskModel taskModel = taskMapper.map(newTask);
+            taskModel.setId(id);
+            taskModel = taskRepository.save(taskModel);
+            return taskMapper.map(taskModel);
         }
         return null;
     }
