@@ -1,5 +1,8 @@
 package dev.diogoalberto.CadastroUsuario.Tasks;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,23 +18,44 @@ public class TaskController {
     }
 
     @PostMapping("/task")
-    public TaskDTO createTask(@RequestBody TaskDTO task){
-        return taskService.createTask(task);
+    public ResponseEntity<?> createTask(@RequestBody TaskDTO task){
+        TaskDTO taskDTO = taskService.createTask(task);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(taskDTO);
     }
 
     @GetMapping("/task")
-    public List<TaskDTO> getTasks(){return taskService.getTasks();}
+    public ResponseEntity<List<TaskDTO>> getTasks(){
+        return ResponseEntity.ok(taskService.getTasks());
+    }
 
     @GetMapping("/task/{id}")
-    public TaskDTO getTaskById(@PathVariable long id){return taskService.getTaskById(id);}
+    public ResponseEntity<?> getTaskById(@PathVariable long id){
+        TaskDTO taskDTO = taskService.getTaskById(id);
+        if (taskDTO != null){
+            return ResponseEntity.ok(taskDTO);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa com ID " + id + " não encontrada...");
+    }
 
     @PutMapping("/task/{id}")
-    public TaskDTO alterTaskById(@PathVariable long id, @RequestBody TaskDTO newTask){
-        return taskService.alterTaskById(id, newTask);
+    public ResponseEntity<?> alterTaskById(@PathVariable long id, @RequestBody TaskDTO newTask){
+        TaskDTO taskDTO = taskService.getTaskById(id);
+        if (taskDTO != null){
+            TaskDTO savedTask = taskService.alterTaskById(id, newTask);
+            return ResponseEntity.ok(savedTask);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa com ID " + id + " não encontrada...");
     }
 
     @DeleteMapping("/task/{id}")
-    public void deleteTaskById(@PathVariable long id){
-        taskService.deleteTaskById(id);
+    public ResponseEntity<String> deleteTaskById(@PathVariable long id){
+        TaskDTO taskDTO = taskService.getTaskById(id);
+        if(taskDTO != null){
+            taskService.deleteTaskById(id);
+            return ResponseEntity.ok("Tarefa com ID " + id + " deletada com sucesso!");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa com ID " + id + " não encontrada...");
     }
 }
