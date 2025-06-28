@@ -2,7 +2,6 @@ package dev.diogoalberto.CadastroUsuario.Tasks;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.config.Task;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class TaskController {
-    private TaskService taskService;
-
+    private final TaskService taskService;
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
@@ -36,7 +34,8 @@ public class TaskController {
         if (taskDTO != null){
             return ResponseEntity.ok(taskDTO);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa com ID " + id + " não encontrada...");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Tarefa com ID " + id + " não encontrada...");
     }
 
     @PutMapping("/task/{id}")
@@ -46,7 +45,8 @@ public class TaskController {
             TaskDTO savedTask = taskService.alterTaskById(id, newTask);
             return ResponseEntity.ok(savedTask);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa com ID " + id + " não encontrada...");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Tarefa com ID " + id + " não encontrada...");
     }
 
     @DeleteMapping("/task/{id}")
@@ -56,6 +56,7 @@ public class TaskController {
             taskService.deleteTaskById(id);
             return ResponseEntity.ok("Tarefa com ID " + id + " deletada com sucesso!");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa com ID " + id + " não encontrada...");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Tarefa com ID " + id + " não encontrada...");
     }
 }
